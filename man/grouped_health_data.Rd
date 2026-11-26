@@ -39,5 +39,12 @@ An object of class \code{esther_grouped}.
 }
 \examples{
 df_w <- load_who_disaggregated('wealth')
-gd <- grouped_health_data(df_w, subgroup = 'subgroup', estimate = 'estimate', se = 'se', population = 'population', scale = 100)
+gd <- grouped_health_data(
+  df_w,
+  subgroup = 'subgroup',
+  estimate = 'estimate',
+  se = 'se',
+  population = 'population',
+  scale = 100
+)
 }

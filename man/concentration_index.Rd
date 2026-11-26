@@ -55,5 +55,13 @@ An object of class \code{esther_result}.
 }
 \examples{
 df <- load_survey_mch(n = 300)
-res <- concentration_index(df, outcome = 'stunting', rank = 'wealth_score', method = 'erreygers', weights = 'sample_weight', strata = 'stratum_id', psu = 'cluster_id')
+res <- concentration_index(
+  df,
+  outcome = 'stunting',
+  rank = 'wealth_score',
+  method = 'erreygers',
+  weights = 'sample_weight',
+  strata = 'stratum_id',
+  psu = 'cluster_id'
+)
 }

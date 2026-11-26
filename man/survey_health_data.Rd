@@ -33,5 +33,10 @@ An object of class \code{esther_survey}.
 }
 \examples{
 df <- load_survey_mch(n = 200)
-svy <- survey_health_data(df, weights = 'sample_weight', strata = 'stratum_id', psu = 'cluster_id')
+svy <- survey_health_data(
+  df,
+  weights = 'sample_weight',
+  strata = 'stratum_id',
+  psu = 'cluster_id'
+)
 }

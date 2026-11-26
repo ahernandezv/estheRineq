@@ -28,8 +28,8 @@ Description: Unites complex-survey health econometrics and epidemiological healt
     'RIF'-Oaxaca decompositions; editorial visualizations (Pelotas 'equiplots',
     concentration curves, gradient plots, decomposition forest plots, and
     Spiegelhalter funnel plots); and multilingual (English, Spanish, Portuguese)
-    'STROBE'-Equity exports following Welch et al. (2025)
-    <doi:10.1136/bmj-2024-080647>.
+    'STROBE'-Equity exports following Dewidar, Welch, et al. (2025)
+    <doi:10.1136/bmj-2024-083882>.
 License: GPL (>= 3)
 URL: https://github.com/ahernandezv/estheRineq,
     https://ahernandezv.github.io/estheRineq/

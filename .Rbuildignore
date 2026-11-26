@@ -6,4 +6,5 @@
 ^CITATION\.cff$
 ^LICENSE\.md$
 ^README\.Rmd$
+^cran-comments\.md$
 ^examples$
