@@ -1,0 +1,86 @@
+---
+title: "Guía en Español: Análisis de Desigualdades en Salud con estheRineq"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Guía en Español: Análisis de Desigualdades en Salud con estheRineq}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.width = 7,
+  fig.height = 4.6
+)
+```
+
+## Introducción
+
+`estheRineq` integra la econometría de desigualdades en encuestas complejas (tipo ENDES, ENAHO, DHS o MICS) y la vigilancia epidemiológica de equidad en salud (las 21 medidas de la OMS, `SII`/`RII`, tasas estandarizadas `DSR`/`SMR`, *equiplots* estilo Pelotas y reportes **STROBE-Equity**). Por defecto genera tablas y gráficos en inglés internacional (`lang = "en"`), y permite cambiar cualquier salida a español (`lang = "es"`) o portugués (`lang = "pt"`).
+
+```{r}
+library(estheRineq)
+
+svy <- survey_health_data(
+  data = survey_mch,
+  weights = "sample_weight",
+  strata = "stratum_id",
+  psu = "cluster_id"
+)
+```
+
+## 1. Índice de Concentración de Erreygers por Dominio y Prueba de Wald
+
+```{r}
+res_ci <- concentration_index(
+  svy,
+  outcome = "stunting",
+  rank = "wealth_score",
+  method = "erreygers",
+  by = "area",
+  favorable = FALSE
+)
+print(res_ci, lang = "es")
+```
+
+## 2. Índices `SII` y `RII` y Gráficos *Equiplot*
+
+```{r}
+res_sii <- sii_rii(
+  svy,
+  outcome = "full_immunization",
+  rank = "wealth_quintile",
+  favorable = TRUE,
+  scale = 100
+)
+print(res_sii, lang = "es")
+```
+
+```{r}
+equiplot(
+  svy,
+  outcome = "full_immunization",
+  subgroup = "wealth_quintile",
+  by = "region",
+  scale = 100,
+  diagnose_pattern = TRUE,
+  sort_by = "gap",
+  lang = "es"
+)
+```
+
+## 3. Estandarización Directa Distrital y Gráfico de Embudo (*Funnel Plot*)
+
+```{r}
+dsr <- direct_standardize(
+  district_mortality,
+  events = "deaths",
+  population = "population",
+  stratum = "age_group",
+  group = "district",
+  standard_pop = "who_broad_5"
+)
+funnel_plot(dsr, lang = "es")
+```

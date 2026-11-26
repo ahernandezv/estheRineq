@@ -1,68 +1,57 @@
-# estheRineq
+# estheRineq <a href="https://ahernandezv.github.io/estheRineq/"><img src="man/figures/logo.png" align="right" height="139" alt="estheRineq website" /></a>
 
-**Epidemiological Statistics Toolkit for Health Inequality Estimation and Reporting in R**
-
+<!-- badges: start -->
 [![R-CMD-check](https://github.com/ahernandezv/estheRineq/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/ahernandezv/estheRineq/actions/workflows/R-CMD-check.yaml)
-[![Documentation](https://img.shields.io/badge/docs-pkgdown-blue.svg)](https://ahernandezv.github.io/estheRineq/)
-[![License: GPL v3+](https://img.shields.io/badge/License-GPLv3+-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
-[![R >= 4.1](https://img.shields.io/badge/R-%3E%3D%204.1.0-276DC3.svg)](https://cran.r-project.org/)
+[![CRAN status](https://www.r-pkg.org/badges/version/estheRineq)](https://CRAN.R-project.org/package=estheRineq)
+[![License: GPL (>= 3)](https://img.shields.io/badge/License-GPL%20%28%3E%3D%203%29-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+<!-- badges: end -->
 
-`estheRineq` is a zero-dependency-core scientific R library (and companion package to Python [`esther-ineq`](https://pypi.org/project/esther-ineq/)) uniting **complex-survey health econometrics** (World Bank *Analyzing Health Equity*, Stata `conindex` / `lorenz` / `oaxaca_rif`, R `convey` / `rineq`) and **epidemiological health inequality surveillance & reporting** (WHO Health Inequality Monitor `healthequal` / HEAT, Pelotas ICEH `equiplot`, UKHSA `PHEindicatormethods`, Moreno-Betancur GLMs, and **STROBE-Equity 2025**).
+**`estheRineq`** (*Epidemiological Statistics Toolkit for Health Inequality Estimation and Reporting in R*) is a zero-dependency-core scientific R package (and companion to Python [`esther-ineq`](https://pypi.org/project/esther-ineq/)) uniting **complex-survey health econometrics** (World Bank *Analyzing Health Equity*, Stata `conindex` / `lorenz` / `oaxaca_rif`, R `convey` / `rineq`) and **epidemiological health inequality surveillance & reporting** (WHO Health Inequality Monitor `healthequal` / HEAT, Pelotas ICEH `equiplot`, UKHSA `PHEindicatormethods`, Moreno-Betancur GLMs, and **STROBE-Equity 2025**).
+
+---
+
+## Installation / Instalación
+
+```r
+# From GitHub:
+# install.packages("remotes")
+remotes::install_github("ahernandezv/estheRineq")
+
+# Or from R-universe (once enabled):
+# install.packages("estheRineq", repos = c("https://ahernandezv.r-universe.dev", "https://cloud.r-project.org"))
+```
 
 ---
 
 ## Key Capabilities (`v0.1.0`)
 
-1. **Dual First-Class S3 Data Containers (`survey_health_data` & `grouped_health_data`):**
-   - Zero external hard `Imports` beyond base R (`stats`, `graphics`, `grDevices`, `grid`, `utils`, `methods`), with automatic seamless support for `survey::svydesign`, `survey::svyrep.design`, and `ggplot2` when installed.
-   - Full complex multistage survey design support: probability weights (`weights`), stratification (`strata`), primary sampling units (`psu`), finite population correction (`fpc`), lonely-PSU handling, survey replicate weights (`BRR`, `Fay`, `JK1`, `JKn`, `Bootstrap`), and unconditional domain/subpopulation comparisons (`by = ...`).
-2. **Exact Influence-Function (`IF` / `RIF`) Variance Kernel:**
-   - Default `vce = "if"` accounts jointly for outcome variance, mean $\hat{\mu}_h$ denominator variance, and fractional rank $\hat{R}_i$ uncertainty in $O(N \log N)$ time, alongside `vce = "convenient"` and `vce = "newey"` modes for 1-to-1 Stata `conindex` replication.
-3. **Complete Concentration & Classical Inequality Suite:**
-   - Standard (`CI`), Generalized (`GC` / `ACI`), Modified (`MC`), **Wagstaff (`W`)**, **Erreygers (`E`)**, **Extended (`v`)**, and **Symmetric (`beta`)** concentration indices with tie-exact interval integration + omnibus subgroup Wald $F$-tests.
-   - Classical `Gini`, `S-Gini`, `Atkinson` (+ Equally Distributed Equivalent `EDE`), `Generalized Entropy` (`MLD`, `Theil`, and Shorrocks between/within subgroup decomposition), `Palma`, and `S80/S20`.
-4. **All 21 WHO Health Inequality Monitor (`healthequal` / HEAT) Summary Measures:**
-   - Simple (`d`, `r`), Ordered (`aci`, `rci`, `sii`, `rii`), Non-ordered (`bgv`, `bgsd`, `covar`, `mdmw`, `mdmu`, `mdbw`, `mdbu`, `mdrw`, `mdru`, `idisw`, `idisu`, `ti`, `mld`), and Population Impact (`par`, `paf`) on both disaggregated tables and complex surveys.
-5. **Modern Epidemiological `SII` & `RII` Engine:**
-   - Survey-weighted logistic G-computation marginal standardization (`method = "logit_marginal"`), Moreno-Betancur identity-link + modified Poisson (`method = "moreno_betancur"`), and WLS/Monte Carlo on surveillance tables, with age/stratum-specific ridits.
-6. **Epidemiological & Need Standardization (`DSR`, `SMR`, `ISR`, and Horizontal Inequity `HI`):**
-   - Directly and indirectly standardized rates with exact Dobson / Byar Poisson-Gamma CIs and built-in WHO (2000–2025), Segi (1960), and European (2013) standard populations.
-   - Gravelle-consistent linear and nonlinear indirect need standardization (`HI`) with PSU-level Rao–Wu–Yue survey bootstrap SEs.
-7. **Regression & Counterfactual Decompositions:**
-   - **Wagstaff, van Doorslaer & Watanabe (2003)** linear & GLM (`AME`/`MEM`) decomposition with **automatic reference-invariant factor grouping** across multi-category factors.
-   - **Bivariate `RIF-I-OLS`** (Heckley, Gerdtham & Kjellsson, 2016) and **`RIF-Oaxaca`** (Ríos-Ávila, 2020, including IPW propensity reweighting).
-8. **Editorial Visualizations & Trilingual `STROBE-Equity` Reporting (`en`, `es`, `pt`):**
-   - Pelotas `equiplot` (microdata, grouped, and Stata-style wide columns with automatic *top* vs. *bottom inequality* pattern diagnostics and row sorting), Concentration/Lorenz curves with simultaneous confidence bands, SII/RII ridit bubble gradients, Decomposition forest plots, and Spiegelhalter `funnel_plot`s.
-   - Direct export to `data.frame`, `Markdown`, `LaTeX` (`booktabs`), `HTML`, `Excel (.xlsx)`, and `Word (.docx)` with automated **STROBE-Equity (2025)** methodological notes.
+| Module | Functions | Methodological Highlights |
+| :--- | :--- | :--- |
+| **Survey & Grouped Containers** | `survey_health_data()`, `grouped_health_data()`, `xtile()`, `compute_fractional_ranks()` | Stratified multistage cluster designs (`weights`, `strata`, `psu`, `fpc`, replicate weights), native `survey::svydesign` adapter, and tie-exact midpoint ridit ranks. |
+| **Concentration & Classical Suite** | `concentration_index()`, `concentration_curve()`, `classical_inequality()`, `decompose_subgroup_ge()`, `survey_mean()` | Standard, generalized, modified, Wagstaff, Erreygers, extended (`v`), and symmetric (`beta`) CIs with exact `O(N log N)` influence functions + omnibus domain Wald *F*-tests; Gini, S-Gini, Atkinson, GE/Theil/MLD, Palma, and S80/S20. |
+| **WHO 21 & Epidemiological SII/RII** | `who_summary()`, `sii_rii()` | All 21 WHO Health Inequality Monitor (`healthequal` / HEAT) summary measures; logistic G-computation marginal `SII`/`RII`, Moreno-Betancur GLMs, and WLS. |
+| **Standardization & Horizontal Inequity** | `direct_standardize()`, `indirect_standardize()`, `standardize_health_need()`, `horizontal_inequity()` | `DSR`, `SMR`, and `ISR` with Dobson/Byar Poisson-Gamma CIs and built-in WHO/Segi/European standards; Gravelle-consistent nonlinear need standardization (`HI`). |
+| **Inequality Decompositions** | `decompose_wagstaff()`, `decompose_rif()`, `decompose_oaxaca_rif()` | Reference-category-invariant Wagstaff GLM decomposition, bivariate `RIF-I-OLS`, and counterfactual `RIF-Oaxaca` with optional IPW reweighting and Rao-Wu-Yue PSU bootstrap. |
+| **Visualizations & STROBE-Equity** | `equiplot()`, `plot_curve()`, `plot_sii_gradient()`, `plot_decomposition()`, `funnel_plot()`, `to_markdown()`, `to_latex()`, `to_excel()`, `to_word()` | Sentence-case publication graphics (`ggplot2` or zero-dependency base R) with dynamic variable names, Pelotas pattern diagnostics, and trilingual (`en`, `es`, `pt`) exports. |
 
 ---
 
-## Installation
+## Quick Start / Uso Rápido
 
-```r
-# Install from GitHub:
-# install.packages("remotes")
-remotes::install_github("ahernandezv/estheRineq")
-```
-
----
-
-## Quick Start
+### 1. Complex-Survey Health Inequalities & Decompositions
 
 ```r
 library(estheRineq)
 
-# 1. Load built-in DHS/ENDES-style complex survey dataset
-df <- load_survey_mch()
-
+# Built-in DHS/ENDES-style complex survey dataset (n = 1,200; 6 strata; 60 PSUs)
 svy <- survey_health_data(
-  data = df,
+  data = survey_mch,
   weights = "sample_weight",
   strata = "stratum_id",
   psu = "cluster_id"
 )
 
-# 2. Erreygers concentration index across urban vs. rural domains + Wald F-test
+# Erreygers concentration index across urban vs. rural domains + Wald F-test
 res_ci <- concentration_index(
   svy,
   outcome = "stunting",
@@ -73,7 +62,7 @@ res_ci <- concentration_index(
 )
 print(res_ci) # Default English; pass lang = "es" or lang = "pt" if needed
 
-# 3. Epidemiological SII & RII + LaTeX booktabs table & STROBE-Equity note
+# Epidemiological SII & RII + LaTeX booktabs table
 res_sii <- sii_rii(
   svy,
   outcome = "full_immunization",
@@ -83,7 +72,7 @@ res_sii <- sii_rii(
 )
 cat(to_latex(res_sii))
 
-# 4. Reference-invariant Wagstaff decomposition
+# Reference-invariant Wagstaff decomposition
 decomp <- decompose_wagstaff(
   svy,
   formula = stunting ~ mother_edu + area + improved_sanitation + child_age_mo,
@@ -93,7 +82,7 @@ decomp <- decompose_wagstaff(
 )
 plot(decomp)
 
-# 5. Pelotas equiplot directly from survey microdata (or wide subgroup columns)
+# Pelotas equiplot directly from survey microdata (or wide subgroup columns)
 equiplot(
   svy,
   outcome = "full_immunization",
@@ -105,6 +94,37 @@ equiplot(
 )
 ```
 
+### 2. Disaggregated Surveillance Tables (`who_disaggregated` & `district_mortality`)
+
+```r
+library(estheRineq)
+
+# All 21 WHO Health Inequality Monitor summary measures from subgroup estimates
+w_sub <- subset(who_disaggregated, dimension == "wealth_quintile")
+gd <- grouped_health_data(
+  w_sub,
+  subgroup = "subgroup",
+  estimate = "estimate",
+  se = "se",
+  population = "population",
+  ordered = TRUE,
+  favorable = TRUE,
+  scale = 100
+)
+who_summary(gd, measures = c("d", "r", "par", "paf", "sii", "rii", "aci", "rci"))
+
+# Directly standardized district mortality rates + Spiegelhalter funnel plot
+dsr <- direct_standardize(
+  district_mortality,
+  events = "deaths",
+  population = "population",
+  stratum = "age_group",
+  group = "district",
+  standard_pop = "who_broad_5"
+)
+funnel_plot(dsr)
+```
+
 ---
 
 ## Methodological Credits & References
@@ -114,26 +134,20 @@ equiplot(
 - **Rank-Dependent Concentration Indices & Decompositions:** O'Donnell, van Doorslaer, Wagstaff & Lindelow (2008); O'Donnell, O'Neill, Van Ourti & Walsh (2016, `conindex`); Heckley, Gerdtham & Kjellsson (2016); Ríos-Ávila (2020, `oaxaca_rif`).
 - **Epidemiological SII, RII, and Reporting:** Moreno-Betancur et al. (2015); Welch et al. (2025, `STROBE-Equity`).
 
+---
+
 ## Citation
+
+If you use `estheRineq` in academic publications, teaching, or technical reports, please cite:
 
 ```r
 citation("estheRineq")
 ```
 
-```bibtex
-@manual{hernandez_vasquez_estherineq_2026,
-  author = {Hern{\'a}ndez-V{\'a}squez, Akram},
-  title  = {{estheRineq: Epidemiological Statistics Toolkit for Health Inequality Estimation and Reporting in R}},
-  year   = {2026},
-  note   = {R package version 0.1.0},
-  url    = {https://github.com/ahernandezv/estheRineq}
-}
-```
+- Hernández-Vásquez, A. (2026). *estheRineq: Epidemiological Statistics Toolkit for Health Inequality Estimation and Reporting in R*. R package version 0.1.0. <https://github.com/ahernandezv/estheRineq>
+
+---
 
 ## Acknowledgments
 
 This work was supported in part by complimentary access to Google Antigravity and Gemini 4 Argon to accelerate scientific workflows.
-
-## License
-
-Distributed under the **GNU General Public License v3.0 or later (`GPL (>= 3)`)**.

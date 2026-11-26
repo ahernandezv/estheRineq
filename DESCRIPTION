@@ -6,28 +6,34 @@ Authors@R: person(
     given = "Akram",
     family = "Hernández-Vásquez",
     role = c("aut", "cre"),
-    email = "akram.hernandez@users.noreply.github.com",
+    email = "akram.hernandez.v@gmail.com",
     comment = c(ORCID = "0000-0003-1431-2526")
   )
 Description: Unites complex-survey health econometrics and epidemiological health
     inequality surveillance and reporting. Provides rank-dependent concentration
     indices (standard, generalized, modified, Wagstaff, Erreygers, extended, and
-    symmetric) with exact O(N log N) Gateaux influence-function linearization,
-    stratified multistage ultimate-cluster variance, replicate weights, and
-    Rao-Wu-Yue survey bootstrap inference; classical univariate inequality indices
-    (Gini, S-Gini, Atkinson, generalized entropy, Palma, S80/S20) and subgroup
-    decompositions; all 21 World Health Organization Health Inequality Monitor
-    summary measures; modern logistic and modified-Poisson slope and relative
-    indices of inequality (SII and RII); direct and indirect epidemiological rate
-    standardization with Dobson and Byar confidence intervals; econometric health-need
-    standardization and horizontal inequity; reference-invariant Wagstaff,
-    recentered influence-function (RIF), and counterfactual RIF-Oaxaca
-    decompositions; editorial visualizations (Pelotas equiplots, concentration
-    curves, gradient plots, decomposition forest plots, and Spiegelhalter funnel
-    plots); and multilingual (English, Spanish, Portuguese) STROBE-Equity
-    exports to Markdown, LaTeX, HTML, Excel, and Word.
+    symmetric) with exact Gateaux influence-function linearization, stratified
+    multistage ultimate-cluster variance, replicate weights, and Rao-Wu-Yue
+    survey bootstrap inference following O'Donnell, O'Neill, Van Ourti, and Walsh
+    (2016) <doi:10.1177/1536867X1601600112>; classical univariate inequality
+    indices (Gini, S-Gini, Atkinson, generalized entropy, Palma, S80/S20) and
+    subgroup decompositions; all 21 World Health Organization Health Inequality
+    Monitor summary measures following Schlotheuber and Hosseinpoor (2022)
+    <doi:10.3390/ijerph191912592>; modern logistic and modified-Poisson slope and
+    relative indices of inequality ('SII' and 'RII') following Moreno-Betancur et
+    al. (2015) <doi:10.1093/ije/dyv148>; direct and indirect epidemiological rate
+    standardization with Dobson and Byar confidence intervals; econometric
+    health-need standardization and horizontal inequity; reference-invariant
+    Wagstaff, recentered influence-function ('RIF'), and counterfactual
+    'RIF'-Oaxaca decompositions; editorial visualizations (Pelotas 'equiplots',
+    concentration curves, gradient plots, decomposition forest plots, and
+    Spiegelhalter funnel plots); and multilingual (English, Spanish, Portuguese)
+    'STROBE'-Equity exports following Welch et al. (2025)
+    <doi:10.1136/bmj-2024-080647>.
 License: GPL (>= 3)
-Encoding: UTF-8
+URL: https://github.com/ahernandezv/estheRineq,
+    https://ahernandezv.github.io/estheRineq/
+BugReports: https://github.com/ahernandezv/estheRineq/issues
 Depends: R (>= 4.1.0)
 Imports:
     grDevices,
@@ -41,7 +47,8 @@ Suggests:
     rmarkdown,
     survey,
     testthat (>= 3.0.0)
-URL: https://github.com/ahernandezv/estheRineq,
-    https://ahernandezv.github.io/estheRineq/
-BugReports: https://github.com/ahernandezv/estheRineq/issues
+VignetteBuilder: knitr
+Config/testthat/edition: 3
+Encoding: UTF-8
+LazyData: true
 NeedsCompilation: no

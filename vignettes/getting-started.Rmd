@@ -1,0 +1,111 @@
+---
+title: "Getting Started with estheRineq"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Getting Started with estheRineq}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.width = 7,
+  fig.height = 4.6
+)
+```
+
+## Overview
+
+`estheRineq` unites complex-survey health econometrics and epidemiological health inequality surveillance in R. Every estimator returns a clean S3 object supporting `print()`, `summary()`, `as.data.frame()`, `to_markdown()`, `to_latex()`, `to_html()`, `to_excel()`, `to_word()`, and automated **STROBE-Equity (2025)** methodological notes.
+
+```{r}
+library(estheRineq)
+
+svy <- survey_health_data(
+  data = survey_mch,
+  weights = "sample_weight",
+  strata = "stratum_id",
+  psu = "cluster_id"
+)
+svy
+```
+
+## 1. Concentration Indices and Curves Across Subpopulations
+
+```{r}
+res_ci <- concentration_index(
+  svy,
+  outcome = "stunting",
+  rank = "wealth_score",
+  method = "erreygers",
+  by = "area",
+  favorable = FALSE
+)
+res_ci
+```
+
+```{r}
+cres <- concentration_curve(
+  svy,
+  outcome = "full_immunization",
+  rank = "wealth_score",
+  by = "area"
+)
+plot(cres)
+```
+
+## 2. Slope and Relative Indices of Inequality (`SII` & `RII`) and WHO 21 Summary Suite
+
+```{r}
+sii_rii(
+  svy,
+  outcome = "full_immunization",
+  rank = "wealth_quintile",
+  favorable = TRUE,
+  scale = 100
+)
+```
+
+```{r}
+w_sub <- subset(who_disaggregated, dimension == "wealth_quintile")
+gd <- grouped_health_data(
+  w_sub,
+  subgroup = "subgroup",
+  estimate = "estimate",
+  se = "se",
+  population = "population",
+  ordered = TRUE,
+  favorable = TRUE,
+  scale = 100
+)
+who_summary(gd, measures = c("d", "r", "par", "paf", "sii", "rii", "aci", "rci", "bgv", "ti", "mld"))
+```
+
+## 3. Reference-Invariant Wagstaff Decomposition and Pelotas Equiplots
+
+```{r}
+dec <- decompose_wagstaff(
+  svy,
+  formula = stunting ~ mother_edu + area + improved_sanitation + child_age_mo,
+  rank = "wealth_score",
+  method = "erreygers",
+  favorable = FALSE,
+  bootstrap_reps = 100
+)
+dec
+plot(dec)
+```
+
+```{r}
+equiplot(
+  svy,
+  outcome = "full_immunization",
+  subgroup = "wealth_quintile",
+  by = "region",
+  scale = 100,
+  diagnose_pattern = TRUE,
+  sort_by = "gap"
+)
+```
