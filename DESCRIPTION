@@ -1,0 +1,47 @@
+Package: estheRineq
+Type: Package
+Title: Epidemiological Statistics Toolkit for Health Inequality Estimation and Reporting
+Version: 0.1.0
+Authors@R: person(
+    given = "Akram",
+    family = "Hernández-Vásquez",
+    role = c("aut", "cre"),
+    email = "akram.hernandez@users.noreply.github.com",
+    comment = c(ORCID = "0000-0003-1431-2526")
+  )
+Description: Unites complex-survey health econometrics and epidemiological health
+    inequality surveillance and reporting. Provides rank-dependent concentration
+    indices (standard, generalized, modified, Wagstaff, Erreygers, extended, and
+    symmetric) with exact O(N log N) Gateaux influence-function linearization,
+    stratified multistage ultimate-cluster variance, replicate weights, and
+    Rao-Wu-Yue survey bootstrap inference; classical univariate inequality indices
+    (Gini, S-Gini, Atkinson, generalized entropy, Palma, S80/S20) and subgroup
+    decompositions; all 21 World Health Organization Health Inequality Monitor
+    summary measures; modern logistic and modified-Poisson slope and relative
+    indices of inequality (SII and RII); direct and indirect epidemiological rate
+    standardization with Dobson and Byar confidence intervals; econometric health-need
+    standardization and horizontal inequity; reference-invariant Wagstaff,
+    recentered influence-function (RIF), and counterfactual RIF-Oaxaca
+    decompositions; editorial visualizations (Pelotas equiplots, concentration
+    curves, gradient plots, decomposition forest plots, and Spiegelhalter funnel
+    plots); and multilingual (English, Spanish, Portuguese) STROBE-Equity
+    exports to Markdown, LaTeX, HTML, Excel, and Word.
+License: GPL (>= 3)
+Encoding: UTF-8
+Depends: R (>= 4.1.0)
+Imports:
+    grDevices,
+    graphics,
+    stats,
+    utils
+Suggests:
+    ggplot2,
+    knitr,
+    plotly,
+    rmarkdown,
+    survey,
+    testthat (>= 3.0.0)
+URL: https://github.com/ahernandezv/estheRineq,
+    https://ahernandezv.github.io/estheRineq/
+BugReports: https://github.com/ahernandezv/estheRineq/issues
+NeedsCompilation: no

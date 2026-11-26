@@ -1,0 +1,9 @@
+^.*\.Rproj$
+^\.Rproj\.user$
+^_pkgdown\.yml$
+^docs$
+^\.github$
+^CITATION\.cff$
+^LICENSE\.md$
+^README\.Rmd$
+^examples$

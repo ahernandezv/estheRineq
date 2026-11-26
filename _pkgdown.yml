@@ -1,0 +1,63 @@
+url: https://ahernandezv.github.io/estheRineq/
+template:
+  bootstrap: 5
+
+reference:
+  - title: "Survey & Disaggregated Data Containers"
+    contents:
+      - survey_health_data
+      - grouped_health_data
+      - compute_fractional_ranks
+      - xtile
+  - title: "Concentration, Classical, WHO 21 & SII/RII Measures"
+    contents:
+      - concentration_index
+      - concentration_curve
+      - survey_mean
+      - classical_inequality
+      - decompose_subgroup_ge
+      - who_summary
+      - sii_rii
+  - title: "Standardization & Horizontal Inequity"
+    contents:
+      - direct_standardize
+      - indirect_standardize
+      - get_standard_population
+      - standardize_health_need
+      - horizontal_inequity
+  - title: "Regression & Counterfactual Decompositions"
+    contents:
+      - decompose_wagstaff
+      - decompose_rif
+      - decompose_oaxaca_rif
+  - title: "Editorial Visualizations"
+    contents:
+      - equiplot
+      - classify_inequality_pattern
+      - plot_curve
+      - plot_sii_gradient
+      - plot_decomposition
+      - funnel_plot
+      - get_palette
+  - title: "STROBE-Equity Reporting & Exporters"
+    contents:
+      - strobe_equity_note
+      - to_markdown
+      - to_latex
+      - to_html
+      - to_excel
+      - to_word
+  - title: "Influence Functions, Variance Kernels & Datasets"
+    contents:
+      - influence_concentration_index
+      - compute_rif
+      - influence_generalized_entropy
+      - influence_atkinson
+      - influence_curve_ordinates
+      - ultimate_cluster_variance
+      - convenient_regression_variance
+      - replicate_weights_variance
+      - rao_wu_survey_bootstrap
+      - load_survey_mch
+      - load_who_disaggregated
+      - load_district_mortality

@@ -1,0 +1,83 @@
+# Generated NAMESPACE for estheRineq
+
+importFrom(grDevices, col2rgb, colorRampPalette, rgb)
+importFrom(graphics, abline, arrows, axis, grconvertY, grid, legend, lines, mtext, par, plot, points, polygon, rect, segments, text)
+importFrom(stats, as.formula, coef, complete.cases, confint, cov, dnorm, model.frame, model.matrix, model.response, na.pass, pf, plogis, pnorm, pt, qchisq, qlogis, qnorm, qt, quantile, rpois, rnorm, runif, sd, setNames, vcov)
+importFrom(utils, globalVariables, head)
+
+# Containers & Ranks
+export(survey_health_data)
+export(grouped_health_data)
+export(compute_fractional_ranks)
+export(xtile)
+
+# Influence Functions & Variance Kernels
+export(influence_concentration_index)
+export(compute_rif)
+export(influence_generalized_entropy)
+export(influence_atkinson)
+export(influence_curve_ordinates)
+export(ultimate_cluster_variance)
+export(convenient_regression_variance)
+export(replicate_weights_variance)
+export(rao_wu_survey_bootstrap)
+
+# Inequality & Surveillance Measures
+export(concentration_index)
+export(concentration_curve)
+export(survey_mean)
+export(classical_inequality)
+export(decompose_subgroup_ge)
+export(who_summary)
+export(sii_rii)
+
+# Epidemiological & Need Standardization
+export(get_standard_population)
+export(direct_standardize)
+export(indirect_standardize)
+export(standardize_health_need)
+export(horizontal_inequity)
+
+# Decompositions
+export(decompose_wagstaff)
+export(decompose_rif)
+export(decompose_oaxaca_rif)
+
+# Visualizations
+export(get_palette)
+export(classify_inequality_pattern)
+export(equiplot)
+export(plot_curve)
+export(plot_sii_gradient)
+export(plot_decomposition)
+export(funnel_plot)
+
+# Reporting & STROBE-Equity Exporters
+export(strobe_equity_note)
+export(to_markdown)
+export(to_latex)
+export(to_html)
+export(to_excel)
+export(to_word)
+
+# Built-in Datasets
+export(load_survey_mch)
+export(load_who_disaggregated)
+export(load_district_mortality)
+
+# S3 Methods
+S3method(print, esther_survey)
+S3method(print, esther_grouped)
+S3method(print, esther_result)
+S3method(print, esther_decomp)
+S3method(print, esther_curve)
+S3method(summary, esther_result)
+S3method(summary, esther_decomp)
+S3method(as.data.frame, esther_result)
+S3method(as.data.frame, esther_decomp)
+S3method(as.data.frame, esther_curve)
+S3method(coef, esther_result)
+S3method(vcov, esther_result)
+S3method(confint, esther_result)
+S3method(plot, esther_curve)
+S3method(plot, esther_decomp)
